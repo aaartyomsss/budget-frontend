@@ -1,25 +1,31 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect } from 'react'
+import Login from './components/Login'
+import { useDispatch, useSelector } from 'react-redux'
+import { login } from './reducers/userReducer'
 
-function App() {
+const App = () => {
+
+  const dispatch = useDispatch()
+  const user = useSelector(state => state)
+
+  useEffect(() => {
+    const userJSON = window.localStorage.getItem('loggedInUser')
+    console.log(userJSON)
+    if(userJSON) {
+      const parsed = JSON.parse(userJSON)
+      dispatch(login(parsed))
+    }
+  }, [dispatch])
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      { user === null ? 
+        <Login />
+        : <p>You are logged in!</p>
+      }
     </div>
-  );
+  )
+
 }
 
-export default App;
+export default App
