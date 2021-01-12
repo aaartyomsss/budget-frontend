@@ -1,7 +1,12 @@
 import React, { useEffect } from 'react'
-import Login from './components/Login'
 import { useDispatch, useSelector } from 'react-redux'
 import { login } from './reducers/userReducer'
+import 'antd/dist/antd.css'
+import Homepage from './components/Homepage'
+import { Route, Switch, Redirect } from 'react-router-dom'
+import Login from './components/Login'
+import SingUp from './components/SignUp'
+import NavBar from './components/NavBar'
 
 const App = () => {
 
@@ -19,10 +24,27 @@ const App = () => {
 
   return (
     <div>
-      { user === null ? 
-        <Login />
-        : <p>You are logged in!</p>
-      }
+      <NavBar user={user}/>
+      <Switch>
+        <Route path='/personal-plan'>
+          <p>Personal plan</p>
+        </Route>
+
+        <Route path='/login'>
+          <Login/>
+        </Route>
+
+        <Route path='/sign-up'>
+          <SingUp/>
+        </Route>
+
+        <Route path='/'>
+          { user === null ? 
+          <Homepage/>
+          : <Redirect to='personal-plan'/>
+          }
+        </Route>
+      </Switch>
     </div>
   )
 

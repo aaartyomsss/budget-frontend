@@ -1,0 +1,26 @@
+.center-div {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 70%;
+}
+
+.border {
+    border: 1px solid black;
+    border-radius: 2em;
+}
+
+.sign-up {
+    padding: 3em 0;
+}
+
+.text-align-center {
+    text-align: center;
+}
+
+.homepage {
+    width: 30%;
+    padding: 7em 0;
+}
+
