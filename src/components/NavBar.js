@@ -12,7 +12,7 @@ const NavBar = ({user}) => {
                 title='Budget App'
                 subTitle={subTitle}
                 extra={[
-                    user ? <Logout/> : null
+                    user ? <Logout key='1'/> : null
                 ]}
             />
         </div>

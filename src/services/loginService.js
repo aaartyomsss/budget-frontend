@@ -1,6 +1,7 @@
 import axios from 'axios'
 const baseUrl = 'http://localhost:3001/api/login'
 const userUrl = 'http://localhost:3001/api/users'
+const googleUrl = 'http://localhost:3001/api/google'
 
 const login = async (creds) => {
     const res = await axios.post(baseUrl, creds)
@@ -13,4 +14,8 @@ const register = async (creds) => {
     return res.data
 }
 
-export default { login, register } // eslint-disable-line
+const postGoogle = async (req) => {
+    const res = await axios.post(googleUrl, req)
+    return res.data
+}
+export default { login, register, postGoogle } // eslint-disable-line

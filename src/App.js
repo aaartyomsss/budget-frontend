@@ -7,6 +7,7 @@ import { Route, Switch, Redirect } from 'react-router-dom'
 import Login from './components/Login'
 import SingUp from './components/SignUp'
 import NavBar from './components/NavBar'
+import Success from './components/Success'
 
 const App = () => {
 
@@ -15,7 +16,6 @@ const App = () => {
 
   useEffect(() => {
     const userJSON = window.localStorage.getItem('loggedInUser')
-    console.log(userJSON)
     if(userJSON) {
       const parsed = JSON.parse(userJSON)
       dispatch(login(parsed))
@@ -36,6 +36,14 @@ const App = () => {
 
         <Route path='/sign-up'>
           <SingUp/>
+        </Route>
+
+        <Route path='/activated'>
+          <Success button={true}/>
+        </Route>
+
+        <Route path='/successful-registration'>
+          <Success button={null}/>
         </Route>
 
         <Route path='/'>

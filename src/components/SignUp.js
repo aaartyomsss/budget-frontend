@@ -1,11 +1,13 @@
 import React from 'react'
-import { Form, Input, Button } from 'antd'
+import { Form, Input, Button, message } from 'antd'
 import loginService from '../services/loginService'
 import '../styles.css'
+import { useHistory } from 'react-router-dom'
 
 const SignUp = () => {
 
     const [form] = Form.useForm()
+    const history = useHistory()
 
     const layout = {
         labelCol: {
@@ -23,17 +25,20 @@ const SignUp = () => {
       }
 
     const handleSubmit = async (values) => {
-        try {
-            const newUser = await loginService.register(values)
-            console.log(newUser)
-        } catch (error) {
-            console.error(error.message)
+        const newUser = await loginService.register(values)
+        if(newUser.error) {
+            message.error(newUser.error)
+        } else {
+            history.push('/successful-registration')
         }
-        
     }
 
+    window.addEventListener('popstate', (event) => {
+        history.push('/')
+    })
+
     return (
-        <div className='center-div border sign-up'>
+        <div className='center-div border padding' >
         <Form from={form} onFinish={handleSubmit} {...layout}>
             <Form.Item 
                 name="username"
