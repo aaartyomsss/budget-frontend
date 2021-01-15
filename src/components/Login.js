@@ -5,6 +5,8 @@ import { login } from '../reducers/userReducer'
 import { Form, Button, Input, message } from 'antd' 
 import '../styles.css'
 import { useHistory } from 'react-router-dom'
+import personalService from '../services/personalService'
+import { initialPersonalPlan } from '../reducers/personalReducer'
 
 
 const Login = () => {
@@ -12,11 +14,13 @@ const Login = () => {
     const history = useHistory()
 
     const handleSubmit = async (values) => {
-        console.log(values)
         try {
-            const res = await loginService.login(values)
-            window.localStorage.setItem('loggedInUser', JSON.stringify(res))
-            dispatch(login(res))
+            const user = await loginService.login(values)
+            const allPersonal = await personalService.getAll()
+            window.localStorage.setItem('loggedInUser', JSON.stringify(user))
+            personalService.setToken(user.token)
+            dispatch(login(user))
+            dispatch(initialPersonalPlan(allPersonal, user.id))
             history.push('/personal-plan')
         } catch (error) {
             if(error.message === 'Request failed with status code 401'){

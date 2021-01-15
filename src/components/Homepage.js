@@ -6,6 +6,8 @@ import { GoogleLogin } from 'react-google-login'
 import loginService from '../services/loginService'
 import { useDispatch } from 'react-redux'
 import { login } from '../reducers/userReducer'
+import personalService from '../services/personalService'
+import { initialPersonalPlan } from '../reducers/personalReducer'
 
 const Homepage = () => {
 
@@ -14,8 +16,12 @@ const Homepage = () => {
 
     const responseGoogle = async (response) => {
         const user = await loginService.postGoogle(response.profileObj)
-        window.localStorage.setItem('loggedInUser', JSON.stringify(user.user))
-        dispatch(login(user.user))
+        const allPersonal = await personalService.getAll()
+        console.log(user, allPersonal)
+        window.localStorage.setItem('loggedInUser', JSON.stringify(user))
+        personalService.setToken(user.token)
+        dispatch(login(user))
+        dispatch(initialPersonalPlan(allPersonal, user.id))
     }
 
     return (

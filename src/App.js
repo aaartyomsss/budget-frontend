@@ -8,26 +8,35 @@ import Login from './components/Login'
 import SingUp from './components/SignUp'
 import NavBar from './components/NavBar'
 import Success from './components/Success'
+import personalService from './services/personalService'
+import { initialPersonalPlan } from './reducers/personalReducer'
+import PersonalList from './components/PersonalList'
 
 const App = () => {
 
   const dispatch = useDispatch()
-  const user = useSelector(state => state)
+  const user = useSelector(state => state.user)
 
   useEffect(() => {
     const userJSON = window.localStorage.getItem('loggedInUser')
     if(userJSON) {
-      const parsed = JSON.parse(userJSON)
-      dispatch(login(parsed))
+      const fetch = async () => {
+        const parsed = JSON.parse(userJSON)
+        const allPersonal = await personalService.getAll()
+        personalService.setToken(parsed.token)
+        dispatch(login(parsed))
+        dispatch(initialPersonalPlan(allPersonal, parsed.id))
+      }
+      fetch()
     }
-  }, [dispatch])
+  }, [dispatch]) // eslint-disable-line
 
   return (
     <div>
       <NavBar user={user}/>
       <Switch>
         <Route path='/personal-plan'>
-          <p>Personal plan</p>
+          <PersonalList/>
         </Route>
 
         <Route path='/login'>

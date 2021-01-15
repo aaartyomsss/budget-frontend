@@ -1,6 +1,6 @@
 import React from 'react'
 import { PageHeader } from 'antd'
-import Logout from './Logout'
+import DropdownMenu from './DropdownMenu'
 
 const NavBar = ({user}) => {
 
@@ -12,7 +12,7 @@ const NavBar = ({user}) => {
                 title='Budget App'
                 subTitle={subTitle}
                 extra={[
-                    user ? <Logout key='1'/> : null
+                    user ? <DropdownMenu key='1'/> : null
                 ]}
             />
         </div>
