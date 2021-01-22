@@ -8,6 +8,9 @@ const personalReducer = (state = [], action) => {
             return action.data
         case 'ADD':
             return state.concat(action.data)
+        case 'REMOVE':
+            const newState = state.filter(obj => obj.id !== action.data)
+            return newState
         default:
             return state
     }
@@ -35,6 +38,16 @@ export const addExpense = values => {
         dispatch({
             type: 'ADD',
             data: expense
+        })
+    }
+}
+
+export const removeExpense = id => {
+    return async dispatch => {
+        const removed = await personalService.removeExpense(id) // eslint-disable-line
+        dispatch({
+            type: 'REMOVE',
+            data: id
         })
     }
 }

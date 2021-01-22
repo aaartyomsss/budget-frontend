@@ -23,4 +23,14 @@ const addExpense = async (toAdd) => {
     return res.data
 }
 
-export default { getAll, addExpense, setToken } // eslint-disable-line
+const removeExpense = async id => {
+
+    const config = {
+        headers: { Authorization: `bearer ${token}`}
+    }
+
+    const res = await axios.delete(`${baseUrl}/${id}`, config)
+    return res.data
+}
+
+export default { getAll, addExpense, setToken, removeExpense } // eslint-disable-line

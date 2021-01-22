@@ -1,16 +1,34 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
 import { Table } from 'antd'
-import { dateFormatter } from '../functions/helperFunctions'
+import { dateFormatter, sortRecent, sortLatest, sortExpensive, sortCheapest } from '../functions/helperFunctions'
 import AddSpendingForm from './AddSpendingForm'
+import PlanHeader from './PlanHeader'
+import { useDispatch } from 'react-redux'
+import { removeExpense } from '../reducers/personalReducer'
+import RemoveButton from './RemoveButton'
   
 const PersonalList = () => {
-    let personalExpenses = useSelector(state => state.personalExpenses)
-    personalExpenses.sort((a, b) => {
-        const dummy1 = new Date(a.date)
-        const dummy2 = new Date(b.date)
-        return dummy2.getTime() - dummy1.getTime()
+    const dispatch = useDispatch()
+    // TODO Fix filtering mechanism
+    // TODO Currently something wont allow table to rerender
+    const personalExpenses = useSelector(({ personalExpenses, filter }) => {
+        switch (filter) {
+            case 'RECENT':
+                return sortRecent(personalExpenses)
+            case 'OLD':
+                return sortLatest(personalExpenses)
+            case 'EXPENSIVE':
+                return sortExpensive(personalExpenses)
+            case 'CHEAPEST':
+                return sortCheapest(personalExpenses)
+            default:
+                return personalExpenses
+        }
     })
+
+    const { Column, ColumnGroup } = Table
+    
     personalExpenses.forEach((obj) => {
         
         // RegEx that will ignore already formatted dates
@@ -47,13 +65,27 @@ const PersonalList = () => {
             dataIndex: 'date',
             key: 'date'
         },
-        
     ]
 
     return (
         <div>
-            <AddSpendingForm/>
-            <Table columns={columns} dataSource={personalExpenses}/>
+            {/* <PlanHeader title={'Personal plan'}/> */}
+            {/* <AddSpendingForm/> */}
+            <Table dataSource={personalExpenses}>
+                <ColumnGroup>
+                    <Column title='Title' dataIndex='title' key='title' />
+                    <Column title='Spent' dataIndex='amountSpent' key='amountSpent' />
+                    <Column title='Category' dataIndex='type' key='type' />
+                    <Column title='Date' dataIndex='date' key='date' />
+                </ColumnGroup>
+                <Column
+                    title='Actions'
+                    key='actions'
+                    render={(text, record) => (
+                        <RemoveButton onClick={() => dispatch(removeExpense(record.id))}/>
+                    )}
+                />
+            </Table>
         </div>
     )
 
