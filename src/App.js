@@ -11,6 +11,7 @@ import Success from './components/Success'
 import personalService from './services/personalService'
 import { initialPersonalPlan } from './reducers/personalReducer'
 import PersonalList from './components/PersonalList'
+import SpendingForm from './components/SpendingForm'
 
 const App = () => {
 
@@ -53,6 +54,10 @@ const App = () => {
 
         <Route path='/successful-registration'>
           <Success button={null}/>
+        </Route>
+
+        <Route path='/spending-form'>
+          <SpendingForm/>
         </Route>
 
         <Route path='/'>

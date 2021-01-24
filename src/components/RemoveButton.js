@@ -5,7 +5,7 @@ import { DeleteOutlined } from '@ant-design/icons'
 const RemoveButton = ({ onClick }) => {
 
     return (
-        <Button onClick={onClick}><DeleteOutlined /> Remove</Button>
+        <Button onClick={onClick}><DeleteOutlined /></Button>
     )
 
 }

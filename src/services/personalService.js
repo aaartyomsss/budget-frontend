@@ -33,4 +33,12 @@ const removeExpense = async id => {
     return res.data
 }
 
-export default { getAll, addExpense, setToken, removeExpense } // eslint-disable-line
+const modifyExpense = async (id, newExpense) => {
+
+    const res = await axios.patch(`${baseUrl}/${id}`, newExpense)
+
+    return res.data
+
+}
+
+export default { getAll, addExpense, setToken, removeExpense, modifyExpense } // eslint-disable-line
