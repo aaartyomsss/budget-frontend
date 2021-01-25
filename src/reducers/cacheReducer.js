@@ -4,7 +4,7 @@ const cacheReducer = (state = null, action) => {
         case 'SET':
             return action.data
         case 'CLEAR':
-            return action.clear
+            return null
         default:
             return state
     }
@@ -20,8 +20,7 @@ export const setCache = obj => {
 
 export const clearCache = () => {
     return {
-        type: 'CLEAR',
-        clear: null
+        type: 'CLEAR'
     }
 }
 

@@ -1,40 +1,48 @@
-import React from 'react'
-import { Button, Layout, Menu } from 'antd'
+import React, { useState } from 'react'
+import { Button, Layout, Menu, Typography, Radio } from 'antd'
 import { useDispatch } from 'react-redux'
 import { setFilter } from '../reducers/filterExpensesReducer'
 import { useHistory } from 'react-router-dom'
+import '../styles.css'
+import { PlusOutlined } from '@ant-design/icons'
 
  
 const PlanHeader = ({ title }) => {
 
+    const [ value, setValue ] = useState('RECENT')
     const dispatch = useDispatch()
     const history = useHistory()
     const { Sider } = Layout
+    const { Title } = Typography
+
+    const onChange = (e) => {
+        console.log(e.target.value)
+        setValue(e.target.value)
+        dispatch(setFilter(e.target.value))
+    }
 
     return (
         <Sider>
             <Menu 
                 style={{ height: '100% '}}
             >  
-                <Menu.Item>
-                    <Button key='1' onClick={() => history.push('/spending-form')}>Add expense</Button>
-                </Menu.Item>
 
-                <Menu.Item>
-                    <Button key='2' onClick={() => dispatch(setFilter('EXPENSIVE'))} htmlType='button'>Sort expensive</Button>
-                </Menu.Item>
+                <Title style={{padding: '0.5em', fontSize: '2em', textAlign: 'center'}}>{title}</Title>
 
-                <Menu.Item>
-                    <Button key='3' onClick={() => dispatch(setFilter('CHEAPEST'))} htmlType='button'>Sort cheapest</Button>
-                </Menu.Item>
+                <div className='sideMenuElement'>
+                    <Button className='sideMenu' key='1' onClick={() => history.push('/spending-form')}><PlusOutlined />Add expense</Button>
+                </div>
 
-                <Menu.Item>
-                    <Button key='4' onClick={() => dispatch(setFilter('OLD'))} htmlType='button'>Oldest</Button>
-                </Menu.Item>
+                <Title style={{ paddingLeft: '1.3em', fontSize: '1.5em', margin: '1em 0' }}>Filters</Title>
 
-                <Menu.Item>
-                    <Button key='5' onClick={() => dispatch(setFilter('RECENT'))} htmlType='button'>Recent</Button>
-                </Menu.Item>
+                <div className='sideMenuElement'>
+                    <Radio.Group value={value} onChange={onChange}>
+                        <Radio className='radioBtn' value='RECENT'>Recent</Radio>
+                        <Radio className='radioBtn' value='OLD'>Old</Radio>
+                        <Radio className='radioBtn' value='EXPENSIVE'>Expensive</Radio>
+                        <Radio className='radioBtn' value='CHEAPEST'>Cheap</Radio>
+                    </Radio.Group>
+                </div>
             </Menu>
         </Sider>
     )

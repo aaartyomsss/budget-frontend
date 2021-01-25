@@ -5,6 +5,8 @@ import { useDispatch, useSelector } from 'react-redux'
 import { addExpense, modifyExpense } from '../reducers/personalReducer'
 import moment from 'moment'
 import { useHistory } from 'react-router-dom'
+import { clearCache } from '../reducers/cacheReducer'
+import '../styles.css'
 
 
 const SpendingForm = () => {
@@ -24,12 +26,14 @@ const SpendingForm = () => {
     }
 
     const onModify = (fieldsValue) => {
+        console.log(fieldsValue)
         const values = {
             ...fieldsValue,
             'date': serverDateFormatter(fieldsValue['date'].format('DD/MM/YYYY'))
         }
         console.log(values)
         dispatch(modifyExpense(cache.id, values))
+        dispatch(clearCache())
         history.push('/personal-plan')
     }
 
@@ -49,7 +53,7 @@ const SpendingForm = () => {
       };
 
     return (
-        <div style={{margin: '2em 0em'}}>
+        <div style={{margin: '2em 0em'}} className='center-div border-form'>
             <Form 
                 onFinish={cache ? onModify : onAdd} 
                 {...layout}

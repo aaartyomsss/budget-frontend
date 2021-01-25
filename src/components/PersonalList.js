@@ -56,8 +56,7 @@ const PersonalList = () => {
                             <Column title='Spent' dataIndex='amountSpent' key='amountSpent' />
                             <Column title='Category' dataIndex='type' key='type' />
                             <Column title='Date' dataIndex='date' key='date' />
-                        </ColumnGroup>
-                        <Column
+                            <Column
                             title='Actions'
                             key='actions'
                             render={(text, record) => (
@@ -67,6 +66,7 @@ const PersonalList = () => {
                                 </Space>
                             )}
                         />
+                        </ColumnGroup>
                     </Table>
                 </Content>
             </Layout>
