@@ -33,6 +33,11 @@ export const sortRecent = array => {
         return date2.getTime() - date1.getTime()})
 }
 
+export const toTime = object => {
+    const dummy = object.split('/')
+    return new Date(dummy[2], dummy[1] - 1, dummy[0])
+}
+
 export const sortLatest = array => {
     
     

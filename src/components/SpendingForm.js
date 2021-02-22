@@ -69,7 +69,7 @@ const SpendingForm = () => {
                     name='title'
                     rules={[{required: true, message: 'This field is required'}]}
                 >
-                    <Input value={cache ? cache.title : ''}/>
+                    <Input/>
                 </Form.Item>
                 <Form.Item 
                     label='Amount spent'

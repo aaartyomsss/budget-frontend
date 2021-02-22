@@ -1,7 +1,7 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
 import { Table, Space, Layout } from 'antd'
-import { dateFormatter, sortRecent, sortLatest, sortExpensive, sortCheapest } from '../functions/helperFunctions'
+import { dateFormatter, sortRecent, toTime } from '../functions/helperFunctions'
 import PlanMenu from './PlanMenu'
 import { useDispatch } from 'react-redux'
 import { removeExpense } from '../reducers/personalReducer'
@@ -14,21 +14,8 @@ const PersonalList = () => {
     const { Column, ColumnGroup } = Table
     const { Content, Footer } = Layout
 
-    // TODO Fix filtering mechanism
-    // TODO Currently something wont allow table to rerender
-    const personalExpenses = useSelector(({ personalExpenses, filter }) => {
-        switch (filter) {
-            case 'RECENT':
-                return sortRecent(personalExpenses)
-            case 'OLD':
-                return sortLatest(personalExpenses)
-            case 'EXPENSIVE':
-                return sortExpensive(personalExpenses)
-            case 'CHEAPEST':
-                return sortCheapest(personalExpenses)
-            default:
-                return personalExpenses
-        }
+    const personalExpenses = useSelector(({ personalExpenses }) => {
+            return sortRecent(personalExpenses)
     })
     
     personalExpenses.forEach((obj) => {
@@ -52,10 +39,10 @@ const PersonalList = () => {
                 <Content>
                     <Table dataSource={personalExpenses}>
                         <ColumnGroup>
-                            <Column title='Title' dataIndex='title' key='title' />
-                            <Column title='Spent' dataIndex='amountSpent' key='amountSpent' />
+                            <Column title='Title' dataIndex='title' key='title'/>
+                            <Column title='Spent' dataIndex='amountSpent' key='amountSpent' sorter={(a, b) => a.amountSpent - b.amountSpent}/>
                             <Column title='Category' dataIndex='type' key='type' />
-                            <Column title='Date' dataIndex='date' key='date' />
+                            <Column title='Date' dataIndex='date' key='date' sorter={(a, b) => toTime(a.date) - toTime(b.date)}/>
                             <Column
                             title='Actions'
                             key='actions'
