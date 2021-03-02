@@ -10,13 +10,14 @@ import NavBar from './components/NavBar'
 import Success from './components/Success'
 import personalService from './services/personalService'
 import { initialPersonalPlan } from './reducers/personalReducer'
-import PersonalList from './components/PersonalList'
+import ExpensesList from './components/ExpensesList'
 import SpendingForm from './components/SpendingForm'
 
 const App = () => {
 
   const dispatch = useDispatch()
   const user = useSelector(state => state.user)
+  const personalExpenses = useSelector(state => state.personalExpenses)
 
   useEffect(() => {
     const userJSON = window.localStorage.getItem('loggedInUser')
@@ -37,7 +38,7 @@ const App = () => {
       <NavBar user={user}/>
       <Switch>
         <Route path='/personal-plan'>
-          <PersonalList/>
+          <ExpensesList expenses={personalExpenses}/>
         </Route>
 
         <Route path='/login'>
@@ -53,7 +54,7 @@ const App = () => {
         </Route>
 
         <Route path='/successful-registration'>
-          <Success button={null}/>
+          <Success button={false}/>
         </Route>
 
         <Route path='/spending-form'>
@@ -63,7 +64,7 @@ const App = () => {
         <Route path='/'>
           { user === null ? 
           <Homepage/>
-          : <Redirect to='personal-plan'/>
+          : <Redirect to='/personal-plan'/>
           }
         </Route>
       </Switch>

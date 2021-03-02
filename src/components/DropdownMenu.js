@@ -23,19 +23,19 @@ const DropdownMenu = () => {
             </Menu.Item>
 
             <Menu.Item>
-                <Link>
+                <Link to='/'>
                     <TeamOutlined/>Family plan
                 </Link>
             </Menu.Item>
 
             <Menu.Item>
-                <Link>
+                <Link to='/'>
                     <EuroCircleOutlined/>My earnings
                 </Link>
             </Menu.Item>
 
             <Menu.Item>
-                <Link>
+                <Link to='/'>
                     <PieChartOutlined />Overview
                 </Link>
             </Menu.Item>
@@ -47,13 +47,17 @@ const DropdownMenu = () => {
     )
 
     return (
-        <div>
-            <Dropdown overlay={menu}>
-                <Button className='ant-dropdown-link' onClick={(e) => e.preventDefault()} type='default'> 
+            <Dropdown key='more' overlay={menu}>
+                <Button 
+                    onClick={(e) => e.preventDefault()} 
+                    type='default'
+                    style={{
+                        display: "inline-block"
+                    }}
+                > 
                     Menu <DownOutlined/>
                 </Button>
             </Dropdown>
-        </div>
     )
 
 }

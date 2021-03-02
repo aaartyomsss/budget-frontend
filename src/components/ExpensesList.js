@@ -1,24 +1,21 @@
 import React from 'react'
-import { useSelector } from 'react-redux'
 import { Table, Space, Layout } from 'antd'
-import { dateFormatter, sortRecent, toTime } from '../functions/helperFunctions'
-import PlanMenu from './PlanMenu'
+import { dateFormatter, toTime } from '../functions/helperFunctions'
 import { useDispatch } from 'react-redux'
 import { removeExpense } from '../reducers/personalReducer'
 import RemoveButton from './RemoveButton'
 import ModifyButton from './ModifyButton'
 import '../styles.css'
-  
-const PersonalList = () => {
+
+// Component that displays list of personal/ family expenses
+
+const ExpensesList = ({ expenses }) => {
+
     const dispatch = useDispatch()
     const { Column, ColumnGroup } = Table
     const { Content, Footer } = Layout
-
-    const personalExpenses = useSelector(({ personalExpenses }) => {
-            return sortRecent(personalExpenses)
-    })
     
-    personalExpenses.forEach((obj) => {
+    expenses.forEach((obj) => {
         
         // RegEx that will ignore already formatted dates
         const reqPattern = /[0-9][0-9]\/[0-9][0-9]\/[0-9][0-9][0-9][0-9]/
@@ -30,14 +27,11 @@ const PersonalList = () => {
         return obj.key = obj.id
     })
 
-    console.log(personalExpenses)
-
     return (
         <div>
             <Layout style={{ height: '100%'}}>
-                <PlanMenu title={'Personal plan'}/>
                 <Content>
-                    <Table dataSource={personalExpenses}>
+                    <Table dataSource={expenses}>
                         <ColumnGroup>
                             <Column title='Title' dataIndex='title' key='title'/>
                             <Column title='Spent' dataIndex='amountSpent' key='amountSpent' sorter={(a, b) => a.amountSpent - b.amountSpent}/>
@@ -46,7 +40,7 @@ const PersonalList = () => {
                             <Column
                             title='Actions'
                             key='actions'
-                            render={(text, record) => (
+                            render={(_text, record) => (
                                 <Space size='middle'>
                                     <RemoveButton onClick={() => dispatch(removeExpense(record.id))}/>
                                     <ModifyButton expense={record}/>
@@ -63,4 +57,4 @@ const PersonalList = () => {
 
 }
 
-export default PersonalList
+export default ExpensesList

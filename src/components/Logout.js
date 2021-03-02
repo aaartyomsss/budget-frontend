@@ -1,7 +1,7 @@
 import React from 'react'
 import { useDispatch } from 'react-redux'
 import { logout } from '../reducers/userReducer'
-import { useHistory } from 'react-router-dom'
+import { useHistory, Link } from 'react-router-dom'
 import { logoutClear } from '../reducers/personalReducer'
 import { LogoutOutlined } from '@ant-design/icons'
 import personalService from '../services/personalService' 
@@ -20,7 +20,7 @@ const Logout = () => {
     }
 
     return (
-        <a style={{textDecoration: 'none', color: 'black'}} onClick={handleLogout} href="#" role="button"><LogoutOutlined/>Logout</a> // eslint-disable-line
+        <Link onClick={handleLogout} to='/'><LogoutOutlined/>Logout</Link> // eslint-disable-line
     )
 
 }
