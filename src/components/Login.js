@@ -1,5 +1,5 @@
 import React from 'react'
-import loginService from '../services/loginService'
+import loginService from '../services/userService'
 import { useDispatch } from 'react-redux'
 import { login } from '../reducers/userReducer'
 import { Form, Button, Input, message } from 'antd' 

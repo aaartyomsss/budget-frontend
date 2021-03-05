@@ -11,7 +11,7 @@ const DropdownMenu = () => {
     const menu = (
         <Menu>
             <Menu.Item>
-                <Link to='/profile'>
+                <Link to='/my-profile'>
                     <IdcardOutlined/>My profile
                 </Link>
             </Menu.Item>

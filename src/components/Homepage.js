@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import { Button, Typography, Divider, Row, Col } from 'antd'
 import '../styles.css'
 import { GoogleLogin } from 'react-google-login'
-import loginService from '../services/loginService'
+import userService from '../services/userService'
 import { useDispatch } from 'react-redux'
 import { login } from '../reducers/userReducer'
 import personalService from '../services/personalService'
@@ -15,7 +15,7 @@ const Homepage = () => {
     const dispatch = useDispatch()
 
     const responseGoogle = async (response) => {
-        const user = await loginService.postGoogle(response.profileObj)
+        const user = await userService.postGoogle(response.profileObj)
         const allPersonal = await personalService.getAll()
         console.log(user, allPersonal)
         window.localStorage.setItem('loggedInUser', JSON.stringify(user))

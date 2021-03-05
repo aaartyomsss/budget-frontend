@@ -1,6 +1,6 @@
 import React from 'react'
 import { Form, Input, Button, message } from 'antd'
-import loginService from '../services/loginService'
+import userService from '../services/userService'
 import '../styles.css'
 import { useHistory } from 'react-router-dom'
 
@@ -25,7 +25,7 @@ const SignUp = () => {
       }
 
     const handleSubmit = async (values) => {
-        const newUser = await loginService.register(values)
+        const newUser = await userService.register(values)
         if(newUser.error) {
             message.error(newUser.error)
         } else {

@@ -12,6 +12,7 @@ import personalService from './services/personalService'
 import { initialPersonalPlan } from './reducers/personalReducer'
 import ExpensesList from './components/ExpensesList'
 import SpendingForm from './components/SpendingForm'
+import MyProfile from './components/MyProfile'
 
 const App = () => {
 
@@ -39,6 +40,10 @@ const App = () => {
       <Switch>
         <Route path='/personal-plan'>
           <ExpensesList expenses={personalExpenses}/>
+        </Route>
+
+        <Route path='/my-profile'>
+          <MyProfile user={user}/>
         </Route>
 
         <Route path='/login'>

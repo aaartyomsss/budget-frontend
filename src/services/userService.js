@@ -18,4 +18,10 @@ const postGoogle = async (req) => {
     const res = await axios.post(googleUrl, req)
     return res.data
 }
-export default { login, register, postGoogle } // eslint-disable-line
+
+const changePassword = async (passwords) => {
+    const res = await axios.patch(`${userUrl}/reset-password`, passwords)
+    return res.data
+}
+
+export default { login, register, postGoogle, changePassword } // eslint-disable-line
