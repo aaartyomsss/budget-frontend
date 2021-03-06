@@ -1,17 +1,29 @@
-import React from 'react'
-import { Card, Popover } from 'antd'
+import React, { useState } from 'react'
+import { Card, Popover, Spin } from 'antd'
 import { RedoOutlined } from '@ant-design/icons'
 import ChangePassword from './ChangePassword'
+import '../styles.css'
 
 
 // TODO component that should provide some features like
 // Changing password, general information, and some other functions would be added further on
 const MyProfile = ({ user }) => {
-    
-    const { Meta } = Card
-    // Organize popover
 
-    // 
+    const { Meta } = Card
+    // State that handles visibility of Popover
+    const [ visibility, setVisibility ] = useState(false)
+    // const handleVisibilityChange = visibility => {
+    //     setVisibility(visibility)
+    // }
+
+    // If user refreshesh page at the tab, component shloud receive user first
+    if (!user) {
+        return (
+            <div className='center-elements-in-div' style={{height: '100vh'}}>
+                <Spin tip='Loading'></Spin>
+            </div>
+        )
+    }
 
     return( 
         <Card
@@ -19,7 +31,8 @@ const MyProfile = ({ user }) => {
                 <Popover
                     trigger='click'
                     title='Change password'
-                    content={<ChangePassword type='loggedIn' username={user.username}/>}
+                    visibility={visibility}
+                    content={<ChangePassword type='loggedIn' username={user.username} setVisibility={setVisibility}/>}
                 >
                     <RedoOutlined />
                 </Popover>

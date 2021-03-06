@@ -1,11 +1,32 @@
 import React from 'react'
 import userService from '../services/userService'
-import { Button, Form, Input } from 'antd'
+import { Button, Form, Input, message } from 'antd'
 // Following component will have different logic
 // depending on whether we forgot password
 // or simply want to change it
 // Current implementation: only logged in user is able to change password 
-const ChangePassword = ({ type, username }) => {
+const ChangePassword = ({ type, username, setVisibility }) => {
+
+    // For clearing form fields
+    const [form] = Form.useForm()
+
+    // Styles for form
+    const layout = {
+        labelCol: {
+          span: 10,
+        },
+        wrapperCol: {
+          span: 14,
+        },
+      };
+      const tailLayout = {
+        wrapperCol: {
+          offset: 0,
+          span: 10,
+        },
+      };
+
+
     // TODO on finish after success form should close automatically
     const onFinish = async values => {
         console.log(values)
@@ -14,18 +35,19 @@ const ChangePassword = ({ type, username }) => {
             currentPassword: values.currentPassword,
             username
         }
-        const res = await userService.changePassword(creds)
         try {
-            console.log(res) // TODO display successful or failed messages
+            const res = await userService.changePassword(creds)
+            message.success(`${res.data.message}`)
+            form.resetFields()
+            setVisibility(false)
         } catch (error) {
-            console.log(error.message)
+            console.log(error)
+            message.error('Current password is incorrect')
         }
     }
 
-    // TODO Create a form and a function that does request to the backend 
-    // and changes the password
     return (
-        <Form onFinish={onFinish}>
+        <Form onFinish={onFinish} {...layout} form={form}>
             {/* if user logged in he should enter current password */}
             {type === 'loggedIn' ? 
                 <Form.Item
@@ -83,7 +105,7 @@ const ChangePassword = ({ type, username }) => {
                 <Input.Password min={6}/>
 
             </Form.Item>
-            <Form.Item>
+            <Form.Item {...tailLayout}>
                 <Button htmlType='submit' type='primary'>Change Password</Button>
             </Form.Item>
         </Form>

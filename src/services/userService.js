@@ -21,7 +21,7 @@ const postGoogle = async (req) => {
 
 const changePassword = async (passwords) => {
     const res = await axios.patch(`${userUrl}/reset-password`, passwords)
-    return res.data
+    return res
 }
 
 export default { login, register, postGoogle, changePassword } // eslint-disable-line

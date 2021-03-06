@@ -10,6 +10,12 @@ body {
     width: 70%;
 }
 
+.center-elements-in-div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 .border {
     border: 1px solid black;
     border-radius: 2em;
