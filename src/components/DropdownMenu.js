@@ -35,7 +35,7 @@ const DropdownMenu = () => {
             </Menu.Item>
 
             <Menu.Item>
-                <Link to='/'>
+                <Link to='/personal-overview'>
                     <PieChartOutlined />Overview
                 </Link>
             </Menu.Item>

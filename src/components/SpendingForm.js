@@ -7,20 +7,23 @@ import moment from 'moment'
 import { useHistory } from 'react-router-dom'
 import { clearCache } from '../reducers/cacheReducer'
 import '../styles.css'
+import CustomSelectCategory from './CustomSelectCategory'
 
 
 const SpendingForm = () => {
 
     const dispatch = useDispatch()
+    // To modify expense
     const cache = useSelector(state => state.cache)
+    
     const history = useHistory()
 
     const onAdd = (fieldsValue) => {
         const values = {
             ...fieldsValue,
+            'type': fieldsValue['type'].type,
             'date': serverDateFormatter(fieldsValue['date'].format('DD/MM/YYYY'))
         }
-        console.log(values)
         dispatch(addExpense(values))
         history.push('/personal-plan')
     }
@@ -31,7 +34,6 @@ const SpendingForm = () => {
             ...fieldsValue,
             'date': serverDateFormatter(fieldsValue['date'].format('DD/MM/YYYY'))
         }
-        console.log(values)
         dispatch(modifyExpense(cache.id, values))
         dispatch(clearCache())
         history.push('/personal-plan')
@@ -83,7 +85,7 @@ const SpendingForm = () => {
                     name='type'
                     rules={[{required: true, message: 'This field is required'}]}
                 >
-                    <Input/>
+                    <CustomSelectCategory/>
                 </Form.Item>
                 <Form.Item
                     label='Date'

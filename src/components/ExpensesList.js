@@ -36,7 +36,7 @@ const ExpensesList = ({ expenses }) => {
                             <Column title='Title' dataIndex='title' key='title'/>
                             <Column title='Spent' dataIndex='amountSpent' key='amountSpent' sorter={(a, b) => a.amountSpent - b.amountSpent}/>
                             <Column title='Category' dataIndex='type' key='type' />
-                            <Column title='Date' dataIndex='date' key='date' sorter={(a, b) => toTime(a.date) - toTime(b.date)}/>
+                            <Column title='Date' dataIndex='date' key='date' defaultSortOrder='descend' sorter={(a, b) => toTime(a.date) - toTime(b.date)}/>
                             <Column
                             title='Actions'
                             key='actions'

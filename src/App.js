@@ -13,6 +13,7 @@ import { initialPersonalPlan } from './reducers/personalReducer'
 import ExpensesList from './components/ExpensesList'
 import SpendingForm from './components/SpendingForm'
 import MyProfile from './components/MyProfile'
+import Overview from './components/Overview'
 
 const App = () => {
 
@@ -56,6 +57,10 @@ const App = () => {
 
         <Route path='/activated'>
           <Success button={true}/>
+        </Route>
+
+        <Route path='/personal-overview'>
+          <Overview />
         </Route>
 
         <Route path='/successful-registration'>
