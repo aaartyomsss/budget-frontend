@@ -2,24 +2,25 @@ import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { login } from './reducers/userReducer'
 import 'antd/dist/antd.css'
-import Homepage from './components/Homepage'
+import Homepage from './components/pages/Homepage'
 import { Route, Switch, Redirect } from 'react-router-dom'
-import Login from './components/Login'
-import SingUp from './components/SignUp'
-import NavBar from './components/NavBar'
-import Success from './components/Success'
+import Login from './components/pages/Login'
+import SingUp from './components/pages/SignUp'
+import NavBar from './components/shared/NavBar'
+import Success from './components/pages/Success'
 import personalService from './services/personalService'
 import { initialPersonalPlan } from './reducers/personalReducer'
-import ExpensesList from './components/ExpensesList'
-import SpendingForm from './components/SpendingForm'
-import MyProfile from './components/MyProfile'
-import Overview from './components/Overview'
+import ExpensesList from './components/pages/ExpensesList'
+import SpendingForm from './components/pages/SpendingForm'
+import MyProfile from './components/pages/MyProfile'
+import Overview from './components/pages/Overview'
 
 const App = () => {
 
   const dispatch = useDispatch()
   const user = useSelector(state => state.user)
   const personalExpenses = useSelector(state => state.personalExpenses)
+
 
   useEffect(() => {
     const userJSON = window.localStorage.getItem('loggedInUser')

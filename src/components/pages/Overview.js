@@ -1,7 +1,7 @@
 import React from 'react'
 import { BarChart, CartesianGrid, XAxis, YAxis, Bar } from 'recharts'
 import { useSelector } from 'react-redux'
-import { spentPerMonth } from '../functions/helperFunctions'
+import { spentPerMonth } from '../../functions/helperFunctions'
 // Following component represents component that will display
 // Graph of spendings vs graph of incomes
 // With specified filters

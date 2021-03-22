@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
 import { Card, Popover, Spin } from 'antd'
 import { RedoOutlined } from '@ant-design/icons'
-import ChangePassword from './ChangePassword'
-import '../styles.css'
+import ChangePassword from '../shared/ChangePassword'
+import '../../styles.css'
 
 
 // TODO component that should provide some features like

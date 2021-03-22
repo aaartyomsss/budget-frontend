@@ -1,13 +1,13 @@
 import React from 'react'
 import { Form, DatePicker, Input, Button } from 'antd'
-import { serverDateFormatter } from '../functions/helperFunctions'
+import { serverDateFormatter } from '../../functions/helperFunctions'
 import { useDispatch, useSelector } from 'react-redux'
-import { addExpense, modifyExpense } from '../reducers/personalReducer'
+import { addExpense, modifyExpense } from '../../reducers/personalReducer'
 import moment from 'moment'
 import { useHistory } from 'react-router-dom'
-import { clearCache } from '../reducers/cacheReducer'
-import '../styles.css'
-import CustomSelectCategory from './CustomSelectCategory'
+import { clearCache } from '../../reducers/cacheReducer'
+import '../../styles.css'
+import CustomSelectCategory from '../forms/CustomSelectCategory'
 
 
 const SpendingForm = () => {
@@ -29,11 +29,12 @@ const SpendingForm = () => {
     }
 
     const onModify = (fieldsValue) => {
-        console.log(fieldsValue)
         const values = {
             ...fieldsValue,
+            'type': fieldsValue['type'].type,
             'date': serverDateFormatter(fieldsValue['date'].format('DD/MM/YYYY'))
         }
+        console.log(values)
         dispatch(modifyExpense(cache.id, values))
         dispatch(clearCache())
         history.push('/personal-plan')
@@ -61,7 +62,7 @@ const SpendingForm = () => {
                 {...layout}
                 initialValues={{
                     ['title']: cache ? cache.title : '', // eslint-disable-line
-                    ['type']: cache ? cache.type : '', // eslint-disable-line
+                    ['type']: '', // eslint-disable-line
                     ['amountSpent']: cache ? cache.amountSpent : '', // eslint-disable-line
                     ['date']: cache ? moment(cache.date, 'DD/MM/YYYY') : moment() // eslint-disable-line
                 }}

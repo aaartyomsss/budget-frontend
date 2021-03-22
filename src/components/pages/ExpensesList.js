@@ -1,11 +1,11 @@
 import React from 'react'
 import { Table, Space, Layout } from 'antd'
-import { dateFormatter, toTime } from '../functions/helperFunctions'
+import { dateFormatter, toTime } from '../../functions/helperFunctions'
 import { useDispatch } from 'react-redux'
-import { removeExpense } from '../reducers/personalReducer'
-import RemoveButton from './RemoveButton'
-import ModifyButton from './ModifyButton'
-import '../styles.css'
+import { removeExpense } from '../../reducers/personalReducer'
+import RemoveButton from '../shared/RemoveButton'
+import ModifyButton from '../shared/ModifyButton'
+import '../../styles.css'
 
 // Component that displays list of personal/ family expenses
 

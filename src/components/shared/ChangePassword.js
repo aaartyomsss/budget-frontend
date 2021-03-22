@@ -1,5 +1,5 @@
 import React from 'react'
-import userService from '../services/userService'
+import userService from '../../services/userService'
 import { Button, Form, Input, message } from 'antd'
 // Following component will have different logic
 // depending on whether we forgot password

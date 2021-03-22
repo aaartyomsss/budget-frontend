@@ -1,7 +1,7 @@
 import React from 'react'
 import { Form, Input, Button, message } from 'antd'
-import userService from '../services/userService'
-import '../styles.css'
+import userService from '../../services/userService'
+import '../../styles.css'
 import { useHistory } from 'react-router-dom'
 
 const SignUp = () => {
