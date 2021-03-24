@@ -12,7 +12,7 @@ const personalReducer = (state = [], action) => {
             const newState = state.filter(obj => obj.id !== action.data)
             return newState
         case 'MODIFIED':
-            const modifiedArr = [...state].map(obj => obj.id === action.data.id ? action.data : obj)
+            const modifiedArr = state.map(obj => obj.id === action.data.id ? action.data : obj)
             return modifiedArr
         default:
             return state
@@ -58,6 +58,7 @@ export const removeExpense = id => {
 export const modifyExpense = (id, newExpense) => {
     return async dispatch => {
         const modified = await personalService.modifyExpense(id, newExpense)
+        console.log(modified)
         dispatch({
             type: 'MODIFIED',
             data: modified

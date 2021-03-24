@@ -35,7 +35,8 @@ const SpendingForm = () => {
             'date': serverDateFormatter(fieldsValue['date'].format('DD/MM/YYYY'))
         }
         console.log(values)
-        dispatch(modifyExpense(cache.id, values))
+        const passID = cache.id
+        dispatch(modifyExpense(passID, values))
         dispatch(clearCache())
         history.push('/personal-plan')
     }
