@@ -62,8 +62,8 @@ export const filterPerMonth = data => {
         },
 ]
     data.forEach(expense => {
-
-        switch (expense.date.split('/')[1]) {
+        console.log(expense.date.split(/\/|-/)[1])
+        switch (expense.date.split(/\/|-/)[1]) {
             case '01':
                 result[0].value += expense.amountSpent
                 break;

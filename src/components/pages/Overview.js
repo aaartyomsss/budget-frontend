@@ -8,16 +8,17 @@ import './Overview.css'
 const Overview = ({ expenses }) => {
 
     // all the data
-    // Initially sorted by month
-    console.log(expenses)
     const personalExpenses = filterPerMonth(expenses)
     console.log(personalExpenses)
+
+    // TODO style component, implement proper positioning and create a separate logic for displaying per year or month overview
+
     return (
         <BarChart width={750} height={250} data={personalExpenses}>
             <CartesianGrid strokeDasharray='3 3' />
             <XAxis dataKey='month'/>
             <YAxis />
-            <Bar dataKey='spent' />
+            <Bar dataKey='value' />
         </BarChart>
     )
 
