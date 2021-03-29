@@ -58,7 +58,6 @@ export const removeExpense = id => {
 export const modifyExpense = (id, newExpense) => {
     return async dispatch => {
         const modified = await personalService.modifyExpense(id, newExpense)
-        console.log(modified)
         dispatch({
             type: 'MODIFIED',
             data: modified

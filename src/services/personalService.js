@@ -19,7 +19,6 @@ const addExpense = async (toAdd) => {
     }
 
     const res = await axios.post(baseUrl, toAdd, config)
-    console.log(res)
     return res.data
 }
 

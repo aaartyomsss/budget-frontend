@@ -17,7 +17,6 @@ const Homepage = () => {
     const responseGoogle = async (response) => {
         const user = await userService.postGoogle(response.profileObj)
         const allPersonal = await personalService.getAll()
-        console.log(user, allPersonal)
         window.localStorage.setItem('loggedInUser', JSON.stringify(user))
         personalService.setToken(user.token)
         dispatch(login(user))
