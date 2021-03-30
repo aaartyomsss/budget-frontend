@@ -7,14 +7,14 @@ import OverviewFilterNavbar from './OverviewFilterNavbar'
 // Graph of spendings vs graph of incomes
 // With specified filters
 const Overview = ({ expenses }) => {
+    
+    // Display month or year
+    const [ filter, setFilter ] = useState("year")
 
     // all the data
     const personalExpenses = filterPerMonth(expenses)
     console.log(personalExpenses)
-
-    // Display month or year
-    const [ filter, setFilter ] = useState("year")
-
+    
     // TODO style component, implement proper positioning and create a separate logic for displaying per year or month overview
 
     return (
