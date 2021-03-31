@@ -2,14 +2,15 @@
 
 export const getYear = date => {
 
-    let dateElements = date.split('-', 3)
+    const deteminer = new RegExp('-')
 
-    if (dateElements !== undefined) {
-        return dateElements[0].substr(1)
-    }
+    if (deteminer.test(date)) {
+        return date.split('-', 3)[0]
+    } 
 
-    const year = date.split('/', 3)[2]
+    const year = date.split('/')[2]
 
     return year
+    
 
 }

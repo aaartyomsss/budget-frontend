@@ -1,19 +1,32 @@
 import React from 'react'
 import { Select } from 'antd'
-import { getYear } from '../../functions/dateFromatters'
+import { getAllYears } from '../../functions/overviewDropdown'
+import { useSelector } from 'react-redux'
 
 
-const OverviewDropdown = ({ type, data }) => {
+const OverviewDropdown = ({ type, setYear }) => {
 
     const { Option } = Select
+    const personalExpenses = useSelector(state => state.personalExpenses)
 
-    // TODO implement dropdown scrollbar
+    const years = getAllYears(personalExpenses)
+    
+    const onChange = value => {
+        console.log(value)
+        setYear(value)
+    }
     
     if (type === "year") {
         return (
             <div>
-                <Select>
-                    
+                <Select
+                    style={{ width: "100%" }}
+                    onChange={onChange}
+                    defaultValue={years[0]}
+                >
+                    {years.map(year => {
+                        return <Option key={year} value={year}>{year}</Option>
+                    })}
                 </Select>
             </div>
         )
