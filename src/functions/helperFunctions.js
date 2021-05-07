@@ -10,7 +10,8 @@ export const capitalizeString = string => {
 }
 
 // Following function filters spending for graph overview per ea month
-export const filterPerMonth = data => {
+export const filterPerMonth = (data, year) => {
+    const filtered = data.filter(e => parseInt(e.date.split(/\/|-/)[0]) === parseInt(year))
     const result = [
         {
             month: 'Jan',
@@ -61,8 +62,7 @@ export const filterPerMonth = data => {
             value: 0,
         },
 ]
-    data.forEach(expense => {
-        console.log(expense.date.split(/\/|-/)[1])
+    filtered.forEach(expense => {
         switch (expense.date.split(/\/|-/)[1]) {
             case '01':
                 result[0].value += expense.amountSpent

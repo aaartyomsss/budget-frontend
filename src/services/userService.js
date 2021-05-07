@@ -15,6 +15,7 @@ const register = async (creds) => {
 }
 
 const postGoogle = async (req) => {
+    console.log(req)
     const res = await axios.post(googleUrl, req)
     return res.data
 }

@@ -24,6 +24,7 @@ const SpendingForm = () => {
             'type': fieldsValue['type'].type,
             'date': serverDateFormatter(fieldsValue['date'].format('DD/MM/YYYY'))
         }
+        console.log(values)
         dispatch(addExpense(values))
         history.push('/personal-plan')
     }

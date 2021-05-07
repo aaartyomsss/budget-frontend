@@ -12,7 +12,6 @@ const OverviewDropdown = ({ type, setYear }) => {
     const years = getAllYears(personalExpenses)
     
     const onChange = value => {
-        console.log(value)
         setYear(value)
     }
     
