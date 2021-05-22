@@ -61,7 +61,7 @@ const App = () => {
         </Route>
 
         <Route path='/personal-overview'>
-          <Overview expenses={personalExpenses}/>
+          <Overview/>
         </Route>
 
         <Route path='/successful-registration'>
