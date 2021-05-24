@@ -3,6 +3,7 @@ import './Overview.css'
 import OverviewFilterNavbar from './OverviewFilterNavbar'
 import OverviewDropdown from './OverviewDropdown'
 import OverviewPerYear from './OverviewPerYear'
+import OverviewPerMonth from './OverviewPerMonth'
 
 
 
@@ -14,13 +15,14 @@ const Overview = () => {
     // Display month or year
     const [ filter, setFilter ] = useState("year");
     const [ selectedYear, setYear ] = useState(new Date().getFullYear());
-    console.log(filter)
+    const [ selectedMonth, setMonth ] = useState()
+
     return (
         <>
             <div className="outer-div">
                     <OverviewFilterNavbar filter={filter} setFilter={setFilter}/>
-                    <OverviewDropdown type={filter} setYear={setYear} value={selectedYear}/>
-                    {filter === 'year' ? <OverviewPerYear selectedYear={selectedYear}/> : <p>month</p>}
+                    <OverviewDropdown type={filter} setYear={setYear} year={selectedYear} month={selectedMonth} setMonth={setMonth}/>
+                    {filter === 'year' ? <OverviewPerYear selectedYear={selectedYear}/> : <OverviewPerMonth />}
             </div>
         </>
     );

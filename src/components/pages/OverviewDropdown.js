@@ -1,29 +1,24 @@
 import React from 'react'
 import { Select } from 'antd'
-import { getAllYears } from '../../functions/overviewDropdown'
+import { getAllCategories, getAllMonths, getAllYears } from '../../functions/overviewDropdown'
 import { useSelector } from 'react-redux'
 
 
-const OverviewDropdown = ({ type, setYear, value }) => {
+const OverviewDropdown = ({ type, setYear, year, month, setMonth }) => {
 
     const { Option } = Select
     const personalExpenses = useSelector(state => state.personalExpenses)
 
     const years = getAllYears(personalExpenses)
-    
-    const onChange = value => {
-        setYear(value)
-    }
-
-    // TODO handle month change
+    const months = getAllMonths(personalExpenses)
     
     if (type === "year") {
         return (
             <div>
                 <Select
                     style={{ width: "100%" }}
-                    onChange={onChange}
-                    value={value}
+                    onChange={(value) => setYear(value)}
+                    value={year}
                 >
                     {years.map(year => {
                         return <Option key={year} value={year}>{year}</Option>
@@ -36,8 +31,8 @@ const OverviewDropdown = ({ type, setYear, value }) => {
             <div>
                 <Select
                     style={{ width: "50%" }}
-                    onChange={onChange}
-                    value={value}
+                    onChange={(value) => setYear(value)}
+                    value={year}
                 >
                     {years.map(year => {
                         return <Option key={year} value={year}>{year}</Option>
@@ -45,11 +40,11 @@ const OverviewDropdown = ({ type, setYear, value }) => {
                 </Select>
                 <Select
                     style={{ width: "50%" }}
-                    onChange={onChange}
-                    value={value}
+                    onChange={(value) => setMonth(value)}
+                    value={month}
                 >
-                    {years.map(year => {
-                        return <Option key={year} value={year}>{year}</Option>
+                    {months.map(month => {
+                        return <Option key={month} value={month}>{month}</Option>
                     })}
                 </Select>
             </div>

@@ -1,9 +1,15 @@
 import personalService from '../services/personalService'
+import { dateFormatter, capitalizeString } from '../functions/helperFunctions'
 
 const personalReducer = (state = [], action) => {
     switch (action.type) {
         case 'INIT':
-            return action.array.filter(obj => obj.user === action.userId)
+            let usersExpenses = action.array.filter(obj => obj.user === action.userId)
+            usersExpenses.forEach(exp => {
+                exp.date = dateFormatter(exp.date)
+                exp.type = capitalizeString(exp.type)
+            })
+            return usersExpenses
         case 'CLEAR':
             return action.data
         case 'ADD':
@@ -37,7 +43,6 @@ export const logoutClear = () => {
 export const addExpense = values => {
     return async dispatch => {
         const expense = await personalService.addExpense(values)
-        console.log(expense)
         dispatch({
             type: 'ADD',
             data: expense

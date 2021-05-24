@@ -107,3 +107,29 @@ export const highestSpentMonth = expenses => {
     })
     return { spentMostIn, maxAmountSpent }
 }
+
+export const filterPerCategory = (expenses, categories) => {
+    let data = []
+
+    categories.forEach(category => {
+        data = [...data, {
+            "category": category,
+            "spent": 0
+        }]
+    })
+
+    data.forEach(obj => {
+        expenses.forEach(exp => {
+            if (obj['category'] === exp.type) {
+                obj['spent'] += exp.amountSpent
+            }
+        })
+    })
+
+    return data
+}
+
+export const getAllCategories = expensesList => {
+    const categories = expensesList.map(exp => exp.type)
+    return [...new Set(categories)]
+}
