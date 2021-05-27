@@ -129,6 +129,30 @@ export const filterPerCategory = (expenses, categories) => {
     return data
 }
 
+export const spentMostPerMonth = expensesPerCategory => {
+    let maxSpent = 0
+    let maxSpentCategory = 0
+    expensesPerCategory.forEach(obj => {
+        if (obj.spent > maxSpent) {
+            maxSpent = obj.spent
+            maxSpentCategory = obj.category
+        }
+    })
+    return { maxSpent, maxSpentCategory } 
+}
+
+export const spentLeastPerMonth = expensesPerCategory => {
+    let leastSpent = Infinity
+    let leastSpentCategory = ''
+    expensesPerCategory.forEach(obj => {
+        if (obj.spent < leastSpent) {
+            leastSpent = obj.spent
+            leastSpentCategory = obj.category
+        }
+    })
+    return { leastSpent, leastSpentCategory } 
+}
+
 export const getAllCategories = expensesList => {
     const categories = expensesList.map(exp => exp.type)
     return [...new Set(categories)]

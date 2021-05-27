@@ -1,15 +1,19 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
-import { getAllCategories, filterPerCategory } from '../../functions/overviewFormatters'
+import { getAllCategories, filterPerCategory, spentMostPerMonth, spentLeastPerMonth } from '../../functions/overviewFormatters'
 import { PieChart, Pie, ResponsiveContainer, Cell, Legend } from 'recharts'
+import { Row, Col } from 'antd'
+import './OverviewPerMonth.css'
 
 
 const OverviewPerMonth = () => {
-
+    // TODO Make function that filters expenses per year and month out of all array
     const personalExpenses = useSelector(state => state.personalExpenses)
     const categories = getAllCategories(personalExpenses)
     const data = filterPerCategory(personalExpenses, categories)
-    
+    const { maxSpent, maxSpentCategory } = spentMostPerMonth(data)
+    const { leastSpent, leastSpentCategory } = spentLeastPerMonth(data)
+
     const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042'];
 
     const RADIAN = Math.PI / 180;
@@ -26,10 +30,8 @@ const OverviewPerMonth = () => {
     };
 
 
-    // TODO write proper legend styles
     const renderLegend = (props) => {
         const { payload } = props;
-        console.log(payload)
         return (
           <ul className='piechart-legend'>
             {
@@ -42,7 +44,9 @@ const OverviewPerMonth = () => {
       }
 
     return (
-        <div>
+      <Row>
+        <Col span={16}>
+          <ResponsiveContainer height={700} width='100%' className='cont'>
             <PieChart width={750} height={400}>
                 <Legend height={50} content={renderLegend}/>
                 <Pie 
@@ -58,9 +62,18 @@ const OverviewPerMonth = () => {
                     ))}
                 </Pie> 
             </PieChart>
-        </div>
+          </ResponsiveContainer>
+        </Col>
+        <Col span={8}>
+          <div className='centering-div'>
+            <p>Most spent category: <b>{maxSpentCategory}</b></p>
+            <p>Total amount spent on that: <b>{maxSpent}</b></p>
+            <p>Least spent category: <b>{leastSpentCategory}</b></p>
+            <p>Total amount spent on that: <b>{leastSpent}</b></p>
+          </div>
+        </Col>
+      </Row>
     )
-
 }
 
 export default OverviewPerMonth
