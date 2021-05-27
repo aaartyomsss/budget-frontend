@@ -1,5 +1,5 @@
 import React from 'react'
-import userService from '../services/userService'
+import userService from '../../services/userService'
 import { Button, Form, Input, message } from 'antd'
 // Following component will have different logic
 // depending on whether we forgot password
@@ -29,7 +29,6 @@ const ChangePassword = ({ type, username, setVisibility }) => {
 
     // TODO on finish after success form should close automatically
     const onFinish = async values => {
-        console.log(values)
         const creds = {
             newPassword: values.newPassword,
             currentPassword: values.currentPassword,
@@ -41,7 +40,6 @@ const ChangePassword = ({ type, username, setVisibility }) => {
             form.resetFields()
             setVisibility(false)
         } catch (error) {
-            console.log(error)
             message.error('Current password is incorrect')
         }
     }

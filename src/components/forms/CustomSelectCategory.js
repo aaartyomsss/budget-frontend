@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { Select, Divider, Input, Button } from 'antd'
-import { capitalizeString } from '../functions/helperFunctions'
+import { capitalizeString } from '../../functions/helperFunctions'
 import { useSelector } from 'react-redux'
 
 // Following component will allow user to pick already entered previously category,

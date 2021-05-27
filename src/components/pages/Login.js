@@ -1,12 +1,12 @@
 import React from 'react'
-import loginService from '../services/userService'
+import loginService from '../../services/userService'
 import { useDispatch } from 'react-redux'
-import { login } from '../reducers/userReducer'
+import { login } from '../../reducers/userReducer'
 import { Form, Button, Input, message } from 'antd' 
-import '../styles.css'
+import '../../styles.css'
 import { useHistory } from 'react-router-dom'
-import personalService from '../services/personalService'
-import { initialPersonalPlan } from '../reducers/personalReducer'
+import personalService from '../../services/personalService'
+import { initialPersonalPlan } from '../../reducers/personalReducer'
 
 
 const Login = () => {

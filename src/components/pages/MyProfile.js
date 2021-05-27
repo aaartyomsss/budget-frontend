@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
 import { Card, Popover, Spin } from 'antd'
 import { RedoOutlined } from '@ant-design/icons'
-import ChangePassword from './ChangePassword'
-import '../styles.css'
+import ChangePassword from '../shared/ChangePassword'
+import '../../styles.css'
 
 
 // TODO component that should provide some features like
@@ -12,9 +12,6 @@ const MyProfile = ({ user }) => {
     const { Meta } = Card
     // State that handles visibility of Popover
     const [ visibility, setVisibility ] = useState(false)
-    // const handleVisibilityChange = visibility => {
-    //     setVisibility(visibility)
-    // }
 
     // If user refreshesh page at the tab, component shloud receive user first
     if (!user) {

@@ -5,7 +5,6 @@ const googleUrl = 'http://localhost:3001/api/google'
 
 const login = async (creds) => {
     const res = await axios.post(baseUrl, creds)
-    console.log(res.data)
     return res.data
 }
 

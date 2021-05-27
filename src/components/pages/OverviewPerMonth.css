@@ -1,0 +1,23 @@
+.piechart-legend li {
+    display: inline;
+    font-weight: 800;
+    font-size: 16px;
+}
+
+.piechart-legend {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: space-around;
+}
+
+.cont {
+    border: 1px solid black;
+    display: flex;
+    justify-content: space-around;
+}
+
+.centering-div {
+    border: 1px solid black;
+    text-align: center;
+}

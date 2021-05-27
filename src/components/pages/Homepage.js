@@ -1,13 +1,13 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { Button, Typography, Divider, Row, Col } from 'antd'
-import '../styles.css'
+import '../../styles.css'
 import { GoogleLogin } from 'react-google-login'
-import userService from '../services/userService'
+import userService from '../../services/userService'
 import { useDispatch } from 'react-redux'
-import { login } from '../reducers/userReducer'
-import personalService from '../services/personalService'
-import { initialPersonalPlan } from '../reducers/personalReducer'
+import { login } from '../../reducers/userReducer'
+import personalService from '../../services/personalService'
+import { initialPersonalPlan } from '../../reducers/personalReducer'
 
 const Homepage = () => {
 
@@ -17,7 +17,6 @@ const Homepage = () => {
     const responseGoogle = async (response) => {
         const user = await userService.postGoogle(response.profileObj)
         const allPersonal = await personalService.getAll()
-        console.log(user, allPersonal)
         window.localStorage.setItem('loggedInUser', JSON.stringify(user))
         personalService.setToken(user.token)
         dispatch(login(user))

@@ -1,10 +1,10 @@
 import React from 'react'
 import { useDispatch } from 'react-redux'
-import { logout } from '../reducers/userReducer'
+import { logout } from '../../reducers/userReducer'
 import { useHistory, Link } from 'react-router-dom'
-import { logoutClear } from '../reducers/personalReducer'
+import { logoutClear } from '../../reducers/personalReducer'
 import { LogoutOutlined } from '@ant-design/icons'
-import personalService from '../services/personalService' 
+import personalService from '../../services/personalService' 
 
 const Logout = () => {
 
