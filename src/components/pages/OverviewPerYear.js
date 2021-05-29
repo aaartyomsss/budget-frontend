@@ -13,10 +13,16 @@ const OverviewPerYear = ({ selectedYear }) => {
     const { spentMostIn, maxAmountSpent } = highestSpentMonth(personalExpenses)
     const spentThroughYear = personalExpenses.reduce((sum, current) => sum + current.value, 0)
 
+    if (personalExpenses.length === 0) {
+        return <div className="nothing-to-display">
+            <p>You have no expenses to display</p>
+        </div>
+    }
+
     return (
         <Row>
             <Col span={16}>
-                <ResponsiveContainer height={700} width='100%'>
+                <ResponsiveContainer height={750} width='100%'>
                     <BarChart data={personalExpenses}>
                         <CartesianGrid strokeDasharray='3 3' />
                         <XAxis dataKey='month'/>

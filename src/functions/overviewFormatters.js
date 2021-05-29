@@ -157,3 +157,8 @@ export const getAllCategories = expensesList => {
     const categories = expensesList.map(exp => exp.type)
     return [...new Set(categories)]
 }
+
+export const getExpensesPerYearAndMonth = (expensesList, year, month) => {
+    const expensesPerYear = expensesList.filter(obj => parseInt(obj.date.split('/')[2]) === parseInt(year))
+    return expensesPerYear.filter(obj => parseInt(obj.date.split('/')[1]) === parseInt(month))
+}

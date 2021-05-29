@@ -12,12 +12,24 @@
 }
 
 .cont {
-    border: 1px solid black;
     display: flex;
     justify-content: space-around;
 }
 
 .centering-div {
-    border: 1px solid black;
-    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.nothing-to-display {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.nothing-to-display > p {
+    font-size: 3rem;
 }

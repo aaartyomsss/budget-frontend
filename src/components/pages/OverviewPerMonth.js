@@ -1,18 +1,25 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
-import { getAllCategories, filterPerCategory, spentMostPerMonth, spentLeastPerMonth } from '../../functions/overviewFormatters'
+import { getAllCategories, filterPerCategory, spentMostPerMonth, spentLeastPerMonth, getExpensesPerYearAndMonth } from '../../functions/overviewFormatters'
 import { PieChart, Pie, ResponsiveContainer, Cell, Legend } from 'recharts'
 import { Row, Col } from 'antd'
 import './OverviewPerMonth.css'
 
 
-const OverviewPerMonth = () => {
-    // TODO Make function that filters expenses per year and month out of all array
+const OverviewPerMonth = ({ selectedYear, selectedMonth }) => {
+
     const personalExpenses = useSelector(state => state.personalExpenses)
-    const categories = getAllCategories(personalExpenses)
-    const data = filterPerCategory(personalExpenses, categories)
+    const formattedExpenses = getExpensesPerYearAndMonth(personalExpenses, selectedYear, selectedMonth)
+    const categories = getAllCategories(formattedExpenses)
+    const data = filterPerCategory(formattedExpenses, categories)
     const { maxSpent, maxSpentCategory } = spentMostPerMonth(data)
     const { leastSpent, leastSpentCategory } = spentLeastPerMonth(data)
+
+    if (formattedExpenses.length === 0) {
+      return <div className="nothing-to-display">
+        <p>You have no expenses to display</p>
+      </div>
+    }
 
     const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042'];
 
@@ -46,7 +53,7 @@ const OverviewPerMonth = () => {
     return (
       <Row>
         <Col span={16}>
-          <ResponsiveContainer height={700} width='100%' className='cont'>
+          <ResponsiveContainer height={750} width='100%' className='cont'>
             <PieChart width={750} height={400}>
                 <Legend height={50} content={renderLegend}/>
                 <Pie 

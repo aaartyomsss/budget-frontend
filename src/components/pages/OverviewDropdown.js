@@ -1,6 +1,6 @@
 import React from 'react'
 import { Select } from 'antd'
-import { getAllCategories, getAllMonths, getAllYears } from '../../functions/overviewDropdown'
+import { getAllMonths, getAllYears } from '../../functions/overviewDropdown'
 import { useSelector } from 'react-redux'
 
 
